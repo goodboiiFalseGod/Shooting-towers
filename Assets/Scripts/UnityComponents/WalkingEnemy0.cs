@@ -1,18 +1,14 @@
-﻿using Assets.UnityComponents;
+﻿using Assets.Scripts.UnityComponents;
+using Assets.UnityComponents;
 using Client;
 using Leopotam.Ecs;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WalkingEnemy0 : MonoBehaviour
+public class WalkingEnemy0 : EnemyBase
 {
     // Start is called before the first frame update
-    IEnumerator Start()
-    {
-        yield return null;
-        CreateEntity();
-    }
 
     // Update is called once per frame
     void Update()
@@ -20,7 +16,7 @@ public class WalkingEnemy0 : MonoBehaviour
 
     }
 
-    void CreateEntity()
+    protected override void CreateEntity()
     {
         EcsEntity WalkingEnemyEntity = SingleTone.mainworld.NewEntity();
 
@@ -36,6 +32,8 @@ public class WalkingEnemy0 : MonoBehaviour
         ref WalkingRoad WalkingRoadComponent = ref WalkingEnemyEntity.Get<WalkingRoad>();
         ref Finished FinishedComponent = ref WalkingEnemyEntity.Get<Finished>();
         ref Transparent TransparentComponent = ref WalkingEnemyEntity.Get<Transparent>();
+        ref EnemyBaseRef EnemyBaseRefComponent = ref WalkingEnemyEntity.Get<EnemyBaseRef>();
+        ref Reward rewardComponent = ref WalkingEnemyEntity.Get<Reward>();
 
         DefenceComponent.fire = 10;
         DefenceComponent.lightning = 0;
@@ -61,6 +59,12 @@ public class WalkingEnemy0 : MonoBehaviour
         FinishedComponent.value = 0;
 
         TransparentComponent.value = 0;
+
+        entity = WalkingEnemyEntity;
+
+        EnemyBaseRefComponent.enemy = this;
+
+        rewardComponent.value = 50;
 
         string msg = this.name + " initilized with ID " + IDComponent.value.ToString();
         Debug.Log(msg);

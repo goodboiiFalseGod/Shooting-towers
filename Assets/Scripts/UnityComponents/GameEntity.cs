@@ -35,5 +35,10 @@ namespace Assets.UnityComponents
         }
 
         protected abstract void CreateEntity();
+
+        protected virtual void OnDestroy()
+        {
+            entity.Destroy();
+        }
     }
 }

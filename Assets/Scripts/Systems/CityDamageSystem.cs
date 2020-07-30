@@ -23,7 +23,6 @@ namespace Client {
                     HealthComponent.value -= EndedHealthComponent.value;
 
                     Object.Destroy(TransformRefComponent.transform.gameObject);
-                    _filterEnded.GetEntity(index).Destroy();
 
                     SingleTone.HealthOfCity = HealthComponent.value;
                 }

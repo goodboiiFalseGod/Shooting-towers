@@ -208,7 +208,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b38d39971639f774b94a5df307f35ccd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  particles: []
+  shootParticles:
+  - {fileID: 9202109779682159624}
+  - {fileID: 6805644922297893623}
+  config: {fileID: 11400000, guid: 407ca1c5adb0e7b459af6d376f1ba395, type: 2}
 --- !u!1 &9202109779682159624
 GameObject:
   m_ObjectHideFlags: 0

@@ -12,3 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9b0736c6b96bad4f8f10d64e51682f5, type: 3}
   m_Name: Configuration
   m_EditorClassIdentifier: 
+  worldStartPos: {x: -100, y: -100, z: 0}
+  worldEndPos: {x: 100, y: 100, z: 0}

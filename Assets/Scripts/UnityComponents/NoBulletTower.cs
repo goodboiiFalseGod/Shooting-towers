@@ -1,23 +1,19 @@
-﻿        using Assets.UnityComponents;
+﻿using Assets;
+using Assets.Scripts.UnityComponents;
+using Assets.UnityComponents;
 using Client;
 using Leopotam.Ecs;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NoBulletTower : GameEntity
+public class NoBulletTower : TowerBase
 {
-    public GameObject[] particles;
+    public Configuration config;
     // Start is called before the first frame update
     protected override void Start()
     {
         base.Start();
-
-        foreach (var p in particles)
-        {
-            p.SetActive(false);
-        }
-
     }
 
     // Update is called once per frame
@@ -33,12 +29,18 @@ public class NoBulletTower : GameEntity
         bulletTowerEntity.Get<CanShootFlying>();
         bulletTowerEntity.Get<CanShootWalking>();
         bulletTowerEntity.Get<Tower>();
+        if (SingleTone.IsMouseOccupied)
+        {
+            bulletTowerEntity.Get<Unplaced>();
+        }        
 
         ref Shooter ShooterComponent = ref bulletTowerEntity.Get<Shooter>();
         ref Damage DamageComponent = ref bulletTowerEntity.Get<Damage>();
         ref ID IDComponent = ref bulletTowerEntity.Get<ID>();
         ref TransformRef TransformRefComponent = ref bulletTowerEntity.Get<TransformRef>();
         ref Particles ParticlesComponent = ref bulletTowerEntity.Get<Particles>();
+        ref TowerBaseRef TowerBaseRefComponent = ref bulletTowerEntity.Get<TowerBaseRef>();
+        ref Price PriceComponent = ref bulletTowerEntity.Get<Price>();
 
         ShooterComponent.cooldown = 0.350f;
         ShooterComponent.currentCooldown = 0;
@@ -59,7 +61,11 @@ public class NoBulletTower : GameEntity
 
         TransformRefComponent.transform = this.transform;
 
-        ParticlesComponent.particles = particles;
+        ParticlesComponent.particles = shootParticles;
+
+        TowerBaseRefComponent.towerBase = this;
+
+        PriceComponent.value = 100;
 
         string msg = this.name + " initilized with ID " + IDComponent.value.ToString();
         Debug.Log(msg);

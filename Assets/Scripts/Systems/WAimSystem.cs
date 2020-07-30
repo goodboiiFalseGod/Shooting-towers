@@ -7,7 +7,7 @@ namespace Client {
         readonly EcsWorld _world = null;
 
         EcsFilter<Enemy, TransformRef, ID, Walking> _filterWalkingEnemy;
-        EcsFilter<Tower, Shooter, CanShootWalking, TransformRef> _filterTower;
+        EcsFilter<Tower, Shooter, CanShootWalking, TransformRef>.Exclude<Unplaced> _filterTower;
 
         void IEcsRunSystem.Run () {
             // add your run code here.

@@ -7,7 +7,7 @@ namespace Client {
         // auto-injected fields.
         readonly EcsWorld _world = null;
 
-        EcsFilter<Shooter, Damage, BulletType, TransformRef> _filterShooter;
+        EcsFilter<Shooter, Damage, BulletType, TransformRef>.Exclude<Unplaced> _filterShooter;
 
         void IEcsRunSystem.Run () {
             // add your run code here.
@@ -27,6 +27,8 @@ namespace Client {
                             GameObject bullet = Object.Instantiate(bulletTypeComponent.bullet, transformRefComponent.transform.position, transformRefComponent.transform.rotation);
                             CreateBullet(bullet, shooterComponent.targetsIDs[i], damageComponent);
                             shooterComponent.currentCooldown = shooterComponent.cooldown;
+
+                            _filterShooter.GetEntity(index).Get<JustShooted>();
                         }
                     }
                 }

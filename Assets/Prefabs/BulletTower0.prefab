@@ -94,4 +94,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1b168def16d40546b7fd2e1aca4f753, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  IsBuy: 0
   bullet: {fileID: 8826893744617782335, guid: 70e7b27fb928f094591e5d07cd3b23eb, type: 3}
+  config: {fileID: 11400000, guid: 407ca1c5adb0e7b459af6d376f1ba395, type: 2}

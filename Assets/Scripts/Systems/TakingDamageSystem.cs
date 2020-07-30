@@ -6,7 +6,7 @@ namespace Client {
         // auto-injected fields.
         readonly EcsWorld _world = null;
 
-        EcsFilter<RecievedDamage, Defence, Health> _filterDamaged;
+        EcsFilter<RecievedDamage, Defence, Health, EnemyBaseRef> _filterDamaged;
 
         void IEcsRunSystem.Run () {
             // add your run code here.
@@ -15,6 +15,7 @@ namespace Client {
                 ref RecievedDamage recievedDamageComponent = ref _filterDamaged.Get1(index);
                 ref Defence defenceComponent = ref _filterDamaged.Get2(index);
                 ref Health healthComponent = ref _filterDamaged.Get3(index);
+                ref EnemyBaseRef enemyBaseRefComponent = ref _filterDamaged.Get4(index);
 
                 float FinDmg = 0;
 
@@ -25,10 +26,15 @@ namespace Client {
 
                 healthComponent.value -= FinDmg;
 
+                if(FinDmg > 0)
+                {
+                    enemyBaseRefComponent.enemy.DisplayDamage(recievedDamageComponent);
+                }
+
                 recievedDamageComponent.fire = 0;
                 recievedDamageComponent.lightning = 0;
                 recievedDamageComponent.physic = 0;
-                recievedDamageComponent.water = 0;
+                recievedDamageComponent.water = 0;                
             }
         }
     }

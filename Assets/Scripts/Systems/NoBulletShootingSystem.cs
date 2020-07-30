@@ -7,7 +7,7 @@ namespace Client {
         // auto-injected fields.
         readonly EcsWorld _world = null;
 
-        EcsFilter<Shooter, Damage, Particles> _filterNoBulletTower;
+        EcsFilter<Shooter, Damage, Particles>.Exclude<Unplaced> _filterNoBulletTower;
         EcsFilter<ID, RecievedDamage> _filterEnemy;
 
         void IEcsRunSystem.Run () {
@@ -23,7 +23,7 @@ namespace Client {
                     foreach (var index1 in _filterEnemy)
                     {
                         ref ID IDComponent = ref _filterEnemy.Get1(index1);
-                        ref RecievedDamage RecievedDamageComponent = ref _filterEnemy.Get2(index);
+                        ref RecievedDamage RecievedDamageComponent = ref _filterEnemy.Get2(index1);
 
                         for(int i = 0; i < shooterComponent.targetsIDs.Length; i++)
                         {
@@ -35,6 +35,8 @@ namespace Client {
                                 RecievedDamageComponent.water = damageComponent.water;
 
                                 shooterComponent.currentCooldown = shooterComponent.cooldown;
+
+                                _filterNoBulletTower.GetEntity(index).Get<JustShooted>();
                             }
                         }
                     }

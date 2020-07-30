@@ -22,6 +22,8 @@ namespace Client {
 #endif
             _systems
                 // register your systems here, for example:
+                .Add(new UnplacedToMouseSystem())
+                .Add(new PlaceSystem())
                 .Add(new CheckAreInRangeSystem())
                 .Add(new FAimSystem())
                 .Add(new WAimSystem())
@@ -31,6 +33,7 @@ namespace Client {
                 .Add(new BulletMovingSystem())
                 .Add(new BulletHitSystem())
                 .Add(new NoBulletShootingSystem())
+                .Add(new ShowShootSystem())
                 .Add(new TakingDamageSystem())
                 .Add(new DeathSystem())
                 .Add(new EnemyFlyingSystem())
@@ -46,6 +49,8 @@ namespace Client {
                 .Init ();
 
             SingleTone.mainworld = _world;
+            SingleTone.IsMouseOccupied = false;
+            SingleTone.currentrlyHeld = null;
         }
 
         void Update () {

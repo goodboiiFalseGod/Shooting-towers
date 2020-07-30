@@ -1,5 +1,5 @@
 namespace Client {
-    struct RecievedDamage {
+    public struct RecievedDamage {
         // add your data here.
         public float lightning;
         public float physic;
